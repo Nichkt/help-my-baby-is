@@ -1,5 +1,5 @@
 (function () {
-  var CHIP_ORDER = ["all", "sick", "hurt", "skin", "feeding", "sleep", "behavior", "care", "growing"];
+  var CHIP_ORDER = ["all", "sick", "hurt", "skin", "feeding", "sleep", "behavior", "care", "growing", "pregnancy"];
   var state = { cat: "all", q: "" };
 
   var $ = function (id) { return document.getElementById(id); };

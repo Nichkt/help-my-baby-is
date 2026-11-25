@@ -1,6 +1,7 @@
 // Tile content for help! My baby is:
 // Edit, add, or remove tiles here. Each one needs an id, cat, label, keys, normal, tryList, callDoc, and now (911 list, can be empty).
 var CATS = {
+  pregnancy: { label: "Before birth", bg: "#E3EEF2", tag: "#155E75" },
   sick: { label: "Feeling sick", bg: "#FCE9E2", tag: "#9A3412" },
   hurt: { label: "Hurt or unsafe", bg: "#FBE3E8", tag: "#9F1239" },
   skin: { label: "Skin and body", bg: "#F6EEDC", tag: "#7A4B00" },
@@ -11,6 +12,11 @@ var CATS = {
   growing: { label: "Growing up", bg: "#E2F1E7", tag: "#166534" }
 };
 var DATA = [
+  { id: "movement", cat: "pregnancy", label: "not moving as much", keys: "not moving fetal movement kicks kicking kick count rolling turning pregnancy womb less movement",
+    normal: "Late in pregnancy, baby has less room. Big rolls and turns often slow down as they get bigger, and that part is normal. Kicks, jabs, and wiggles should keep coming at about the same rate right up to birth.",
+    tryList: ["Lie on your left side in a quiet spot and pay attention to movement for up to 2 hours.", "Get to know baby's usual pattern from about 28 weeks, including their busy times of day.", "Don't use a home heartbeat monitor to reassure yourself. It can miss a problem."],
+    callDoc: ["Movements feel weaker or different from baby's usual pattern, even if they haven't stopped.", "You're not sure. Labor and delivery would rather check and send you home."],
+    now: ["Baby has stopped kicking, or kicks are clearly fewer than usual. Call your doctor or labor and delivery right away and go in. Don't wait until tomorrow.", "Fewer movements along with bleeding, leaking fluid, or strong belly pain."] },
   { id: "fever", cat: "sick", label: "running a fever", keys: "fever temperature hot",
     normal: "A fever means the body is fighting an infection. For babies, 100.4°F (38°C) or higher counts. A rectal reading is the most accurate under 3 months.",
     tryList: ["Offer breastmilk or formula often to keep them hydrated.", "Dress them in one light layer and skip heavy blankets.", "Ask your doctor before giving any fever medicine, and dose by the label for their age and weight."],
