@@ -64,6 +64,9 @@
     $("d-now-wrap").hidden = d.now.length === 0;
     $("d-now-wrap").style.display = d.now.length ? "" : "none";
     $("d-calm").style.display = d.now.length ? "none" : "";
+    $("d-fine").textContent = d.cat === "pregnancy"
+      ? "Unsure? Trust your gut and call your OB, midwife, or labor and delivery. They are there 24 hours a day."
+      : "Unsure? Trust your gut and call your pediatrician. Most offices have a 24-hour nurse line.";
     home.hidden = true;
     detail.hidden = false;
     document.title = "My baby is " + d.label + " | help! My baby is:";
