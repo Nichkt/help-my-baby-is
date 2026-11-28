@@ -1,0 +1,57 @@
+name: Android build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'android/**'
+      - '*.html'
+      - '*.css'
+      - '*.js'
+      - '.github/workflows/android.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+
+      - name: Bundle the site into the app
+        run: |
+          mkdir -p android/app/src/main/assets/www
+          cp index.html styles.css app.js data.js icon.svg manifest.webmanifest android/app/src/main/assets/www/
+
+      - name: Build release bundle (unsigned)
+        working-directory: android
+        run: gradle --no-daemon bundleRelease
+
+      - name: Publish the bundle to the android-build branch
+        run: |
+          mkdir -p /tmp/out
+          cp android/app/build/outputs/bundle/release/app-release.aab /tmp/out/app-release-unsigned.aab
+          echo "${GITHUB_SHA}" > /tmp/out/SOURCE_COMMIT
+          cd /tmp/out
+          git init -q -b android-build
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Unsigned release bundle from ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" android-build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-release-unsigned
+          path: android/app/build/outputs/bundle/release/app-release.aab
